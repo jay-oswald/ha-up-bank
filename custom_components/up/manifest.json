@@ -1,0 +1,10 @@
+{
+    "domain": "up",
+    "name": "Up Bank Integration",
+    "dependencies": ["http"],
+    "codeowners": ["@jay-oswald"],
+    "version": "0.0.1",
+    "integration_type": "hub",
+    "config_flow": true,
+    "iot_class": "cloud_polling"
+}

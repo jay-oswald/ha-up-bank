@@ -1,0 +1,13 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Config for Up Integration",
+                "description": "Enter the API key for UP",
+                "data": {
+                    "api_key": "API Key"
+                }
+            }
+        }
+    }
+}
