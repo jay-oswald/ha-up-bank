@@ -26,19 +26,24 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     for account_id in coordinator.data["accounts"]:
         entities.append(Account(coordinator, coordinator.data["accounts"][account_id]))
     
-    entities.append(TotalSavings(
-        coordinator,
-        'joint',
-        coordinator.data['totals']['joint']['balance'],
-        coordinator.data['accounts'][coordinator.data['totals']['joint']['id']]
-        ))
-    
+    individual_balance = coordinator.data['totals']['individual']['balance']
+    individual_id = coordinator.data['totals']['individual']['id']
     entities.append(TotalSavings(
         coordinator,
         'individual',
-        coordinator.data['totals']['individual']['balance'],
-        coordinator.data['accounts'][coordinator.data['totals']['individual']['id']]
+        individual_balance,
+        coordinator.data['accounts'][individual_id]
         ))
+
+    joint_balance = coordinator.data['totals']['joint']['balance']
+    joint_id = coordinator.data['totals']['joint']['id']
+    if(joint_id != ''):
+        entities.append(TotalSavings(
+            coordinator,
+            'joint',
+            joint_balance,
+            coordinator.data['accounts'][joint_id]
+            ))
     
 
     async_add_entities(entities)
