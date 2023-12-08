@@ -35,7 +35,6 @@ class UP:
         for account in result.data['data']:
             details = BankAccount(account)
             accounts[details.id] = details
-                    
         return accounts
 
 
