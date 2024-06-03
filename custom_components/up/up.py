@@ -9,12 +9,12 @@ class UP:
     def __init__(self, key):
         self.api_key = key;
 
-    async def call(self, endpoint, data = {}, method="get"):
+    async def call(self, endpoint, params = {}, method="get"):
         headers = { "Authorization": "Bearer " + self.api_key}
         match method:
             case "get":
                 async with aiohttp.ClientSession(headers=headers) as session:
-                    async with session.get(base + endpoint) as resp:
+                    async with session.get(base + endpoint, params=params) as resp:
                         resp.data = await resp.json()
                         return resp
 
@@ -27,7 +27,7 @@ class UP:
         return result.status == 200
     
     async def getAccounts(self):
-        result = await self.call('/accounts')
+        result = await self.call('/accounts',{"page[size]": 100})
         if(result.status != 200):
             return False
 
